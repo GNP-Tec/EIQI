@@ -1,6 +1,18 @@
 <?php
-$db=mysql_pconnect("localhost","eiqi","fBTvStW2vqy62KhS");
-
+	require_once("inc/hs_core.php"); //Include Core-File for basic
+	$hs=New hs_core;
+	$hs->init();
+	if($hs->is_auth()) {
+		if(isset($_GET['logout'])) {
+			$hs->logout();
+		}
+	} else {
+		if(isset($_POST["username"])) {
+			if($hs->login($_POST["username"],$_POST["password"])) {
+				echo "<script type=text/javascript>alert(\"User and Password combination is wrong!\")</script>";
+			}
+		}
+	}
 ?>
 
 
@@ -32,37 +44,48 @@ $db=mysql_pconnect("localhost","eiqi","fBTvStW2vqy62KhS");
 
 	<div id="menubar">
       <ul id="menu">
-        <li class="current"><a href="index.html">Home</a></li>
-        <li><a href="ourwork.html">Our Work</a></li>
-        <li><a href="testimonials.html">Testimonials</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
+	
+        <li <?php if(!isset($_POST['p']) || $_POST['p']="") { echo "class=\"current\""; } ?>><a href="index.php">Home</a></li>
       </ul>
     </div><!--close menubar-->	
     
-	<div id="site_content">		
-
-	  <div class="sidebar_container">       
+	<div id="site_content">	
+	<div class="sidebar_container"> 	
+	<?php
+	if($hs->is_auth()) {
+	?>
 		<div class="sidebar">
           <div class="sidebar_item">
-            <h2>Running VM's</h2>
-            Test-VM<br>
-            Windof<br>
-          </div><!--close sidebar_item--> 
-        </div><!--close sidebar-->     		
-		<div class="sidebar">
+            <h2>Welcome!</h2>
+	<?php
+		echo "Hello, ".$hs->get_title()." ".$hs->get_first_name()." ".$hs->get_last_name()."!<br>Login Time: ".$hs->get_last_login()."<br>";
+	?>
+	<a href="index.php?logout">Logout</a>
+		  </div><!--close sidebar_item--> 
+        </div><!--close sidebar--> 
+	<div class="sidebar">
           <div class="sidebar_item">
             <h2>Latest Events</h2>
             <h3>VM-Started</h3>
             <p>Test-VM started</p>         
 		  </div><!--close sidebar_item--> 
         </div><!--close sidebar--> 		
-        <div class="sidebar">
-          <div class="sidebar_item">
-            <h2>Contact</h2>
-            <p>Email: <a href="mailto:office@gnp-tec.net">Office</a></p>
-          </div><!--close sidebar_item--> 
+	<?php
+	} else {
+	?>
+	<div class="sidebar">
+        <div class="sidebar_item">
+        <h2>Login</h2>
+	<form action="index.php" method="post">
+	Username: <input type="text" name="username" /><br>
+	Password: <input type="password" name="password" /><br>
+	<input type="submit" value="Login!"/>
+	</form>
+	</div><!--close sidebar_item--> 
         </div><!--close sidebar-->
+	<?php
+	}
+	?>
        </div><!--close sidebar_container-->	
 	
       <!--<ul class="slideshow">
@@ -126,7 +149,7 @@ $db=mysql_pconnect("localhost","eiqi","fBTvStW2vqy62KhS");
   </div><!--close main-->
   
   <div id="footer">
-	  <a href="http://validator.w3.org/check?uri=referer">Valid XHTML</a> | <a href="http://fotogrph.com/">Images</a> | website template by <a href="http://www.araynordesign.co.uk">ARaynorDesign</a>
+	  <a href="http://validator.w3.org/check?uri=referer">Valid XHTML</a> | <a href="http://fotogrph.com/">Images</a> | website template by <a href="http://www.araynordesign.co.uk">ARaynorDesign</a> | <?php $hs->end(); //Disconnects from DB, unloads values ?>
   </div><!--close footer-->  
   
 </body>
