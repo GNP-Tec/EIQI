@@ -75,7 +75,7 @@ class hs_core {
                 if(isset($_SESSION["hs_core_set"])) {
                         $this->settings=unserialize($_SESSION["hs_core_set"]);
 			if(HS_LOGIN_TIMEOUT && $this->settings->auth && (time()-strtotime($this->settings->last_login))>HS_LOGIN_TIMEOUT) {
-				echo "Logged out by timeout! ".strtotime($this->settings->last_login)." ".time()." ".$this->settings->last_login."<br>";
+				//echo "Logged out by timeout! ".strtotime($this->settings->last_login)." ".time()." ".$this->settings->last_login."<br>";
 				unset($this->settings);
 				$this->settings= new hs_core_set;
 				$this->settings->init();
@@ -83,10 +83,10 @@ class hs_core {
 	        } else {
         	        $this->settings= new hs_core_set;
 			$this->settings->init();
-			echo "creating new session!<br>";
+			//echo "creating new session!<br>";
         	}
 
-		echo "init done!<br>";
+		//echo "init done!<br>";
 		$this->state=1; //State 1 means initialised and ready
 		return 0;
 	}

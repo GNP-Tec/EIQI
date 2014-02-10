@@ -1,7 +1,13 @@
 <?php
-	require_once("inc/hs_core.php"); //Include Core-File for basic
+	require_once("inc/hs_core.php"); //Include Core-File for basic user-IO
+	require_once("inc/eiqi.php");
 	$hs=New hs_core;
 	$hs->init();
+	if(isset($_GET['p'])) {
+		$p_curr=eiqi_parse_page($_GET['p']);
+	} else {
+		$p_curr=0;
+	}
 	if($hs->is_auth()) {
 		if(isset($_GET['logout'])) {
 			$hs->logout();
@@ -20,7 +26,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
 <head>
-  <title>Enhanced Integrated QEMU Interface</title>
+  <title>EIQI - <?php echo eiqi_title_get($p_curr); ?> </title>
   <meta name="description" content="EIQI" />
   <meta name="keywords" content="gnp;net;tec;eiqi;qemu;php;mysql" />
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
