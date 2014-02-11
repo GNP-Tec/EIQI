@@ -99,7 +99,7 @@ class hs_core {
 		$state=-1; //Means  deactivated.
 		$this->end_time=microtime(true);
 		$this->run_time=$this->end_time-$this->start_time;
-		echo "Runtime: ".$this->run_time."s.<br>";
+		return "Runtime: ".$this->run_time."s.<br>";
 	}
 
 	function is_auth() {

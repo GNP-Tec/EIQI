@@ -1,23 +1,7 @@
 <?php
-	require_once("inc/hs_core.php"); //Include Core-File for basic user-IO
-	require_once("inc/eiqi.php");
-	$hs=New hs_core;
-	$hs->init();
-	$hp=new eiqi;
-	if(isset($_GET['p'])) {
-		$hp->parse_page($_GET['p']);
-	}
-	if($hs->is_auth()) {
-		if(isset($_GET['logout'])) {
-			$hs->logout();
-		}
-	} else {
-		if(isset($_POST["username"])) {
-			if($hs->login($_POST["username"],$_POST["password"])) {
-				echo "<script type=text/javascript>alert(\"User and Password combination is wrong!\")</script>";
-			}
-		}
-	}
+	require_once("inc/hp.php");
+	$hp=new hp;
+
 ?>
 
 
@@ -25,6 +9,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
 <head>
+  <?php echo $hp->header_get(); ?>
   <title>EIQI - <?php echo $hp->title_get(); ?> </title>
   <meta name="description" content="EIQI" />
   <meta name="keywords" content="gnp;net;tec;eiqi;qemu;php;mysql" />
@@ -55,41 +40,7 @@
     
 	<div id="site_content">	
 	<div class="sidebar_container"> 	
-	<?php
-	if($hs->is_auth()) {
-	?>
-		<div class="sidebar">
-          <div class="sidebar_item">
-            <h2>Welcome!</h2>
-	<?php
-		echo "Hello, ".$hs->get_title()." ".$hs->get_first_name()." ".$hs->get_last_name()."!<br>Login Time: ".$hs->get_last_login()."<br>";
-	?>
-	<a href="index.php?logout">Logout</a>
-		  </div><!--close sidebar_item--> 
-        </div><!--close sidebar--> 
-	<div class="sidebar">
-          <div class="sidebar_item">
-            <h2>Latest Events</h2>
-            <h3>VM-Started</h3>
-            <p>Test-VM started</p>         
-		  </div><!--close sidebar_item--> 
-        </div><!--close sidebar--> 		
-	<?php
-	} else {
-	?>
-	<div class="sidebar">
-        <div class="sidebar_item">
-        <h2>Login</h2>
-	<form action="index.php" method="post">
-	Username: <input type="text" name="username" /><br>
-	Password: <input type="password" name="password" /><br>
-	<input type="submit" value="Login!"/>
-	</form>
-	</div><!--close sidebar_item--> 
-        </div><!--close sidebar-->
-	<?php
-	}
-	?>
+	<?php echo $hp->sidebar_get(); ?>
        </div><!--close sidebar_container-->	
 	
       <!--<ul class="slideshow">
@@ -101,22 +52,7 @@
 	        <div class="content_item">
 			 <?php echo $hp->content_get(); ?>
 			 <!-- <div class="content_image">
-			    <img src="images/content_image1.jpg" alt="image1"/> -->
-		</div>
-		  <br style="clear:both"/>
-		  
-		  <div class="content_container">
-		    <p></p>
-		  	<div class="button_small">
-		      <a href="#">Read more</a>
-		    </div><!--close button_small-->
-		  </div><!--close content_container-->
-          <div class="content_container">
-		    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque cursus tempor enim. Aliquam facilisis neque non nunc posuere eget volutpat metus tincidunt.</p>          
-		  	<div class="button_small">
-		      <a href="#">Read more</a>
-		    </div><!--close button_small-->		  
-		  </div><!--close content_container-->			  
+			    <img src="images/content_image1.jpg" alt="image1"/> -->	  
 		</div><!--close content_item-->
       </div><!--close content-->   
 	</div><!--close site_content--> 
@@ -149,7 +85,7 @@
   </div><!--close main-->
   
   <div id="footer">
-	  <a href="http://validator.w3.org/check?uri=referer">Valid XHTML</a> | <a href="http://fotogrph.com/">Images</a> | website template by <a href="http://www.araynordesign.co.uk">ARaynorDesign</a> | <?php $hs->end(); //Disconnects from DB, unloads values ?>
+	  <a href="http://validator.w3.org/check?uri=referer">Valid XHTML</a> | <a href="http://fotogrph.com/">Images</a> | website template by <a href="http://www.araynordesign.co.uk">ARaynorDesign</a> | <?php echo $hp->footer_get(); ?>
   </div><!--close footer-->  
   
 </body>
