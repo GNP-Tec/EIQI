@@ -1,8 +1,8 @@
 <?php
 require_once("inc/hs_core.php"); //Include Core-File for basic user-IO
 class hp {
-	var $pages=array("home", "user_set", "vm_ov");
-	var $titles=array("Home", "Account settings", "VM Overview");
+	var $pages=array("home", "user_set", "vm_ov", "user_create");
+	var $titles=array("Home", "Account settings", "VM Overview", "Create new users");
 	var $links=array("Home", "Account", "VM Overview");
 	var $curr=0;
 	var $hs;
@@ -92,10 +92,37 @@ class hp {
 		return $ret;
 	}
 	function content_get() {
-		switch($this->curr) {
-			case 0: return "<h1>Welcome to EiQi!</h1>";
-			default: break;
+		$ret="";
+		if($this->hs->is_auth()) {
+			switch($this->curr) {
+				case 0: $ret.="<h1>Welcome to EiQi</h1>";
+					$ret.="<h2>Overview</h2>";
+					break;
+				case 1: $ret.="<h1>User-Settings</h1>";
+					$ret.="<form action=\"index.php\" method=\"post\">";
+					$ret.="Username: ".$this->hs->get_user()."<br>";
+					$ret.="Email: <input type=\"text\" name=\"se_email\">";
+		
+					$ret.="<input type=\"submit\" value=\"Update\">";
+					$ret.="</form>";
+					break;
+			}
+		} else {
+			$ret.="<h1>Welcome to EiQi!</h1>";
+			$ret.="Please login first!";
 		}
+		return $ret;
+	}
+	function southbar_get() {
+		$ret="";
+		$ret.="<div class=\"content_grey_container_box\">";
+		$ret.="<h4>EIQI Development</h4>";
+		$ret.="<p>EIQI is currently under development. Report errors on GitHub/GNP-Tec or via email.</p>";
+		$ret.="<div class=\"readmore\">";
+		$ret.="<a href=\"http://www.gnp-tec.net\">Read more</a>";
+		$ret.="</div><!--close readmore-->";
+		$ret.="</div><!--close content_grey_container_box-->";
+		return $ret;
 	}
 	function footer_get() {
 		$ret="";

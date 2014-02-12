@@ -41,51 +41,22 @@
 	<div id="site_content">	
 	<div class="sidebar_container"> 	
 	<?php echo $hp->sidebar_get(); ?>
-       </div><!--close sidebar_container-->	
-	
-      <!--<ul class="slideshow">
-        <li class="show"><img width="680" height="250" src="images/home_1.jpg" alt="&quot;Enter your caption here&quot;" /></li>
-        <li><img width="680" height="250" src="images/home_2.jpg" alt="&quot;Enter your caption here&quot;" /></li>
-      </ul> -->   	 
+       </div><!--close sidebar_container-->	 
 	 
 	<div id="content">
 	        <div class="content_item">
-			 <?php echo $hp->content_get(); ?>
-			 <!-- <div class="content_image">
-			    <img src="images/content_image1.jpg" alt="image1"/> -->	  
+			 <?php echo $hp->content_get(); ?> 
 		</div><!--close content_item-->
       </div><!--close content-->   
 	</div><!--close site_content--> 
-    
-	<div id="content_grey">
-	  <div class="content_grey_container_box">
-		<h4>Latest Blog Post</h4>
-	    <p> Phasellus laoreet feugiat risus. Ut tincidunt, ante vel fermentum iaculis.</p>
-		<div class="readmore">
-		  <a href="#">Read more</a>
-		</div><!--close readmore-->
-	  </div><!--close content_grey_container_box-->
-      <div class="content_grey_container_box">
-       <h4>Latest News</h4>
-	    <p> Phasellus laoreet feugiat risus. Ut tincidunt, ante vel fermentum iaculis.</p>
-	    <div class="readmore">
-		  <a href="#">Read more</a>
-		</div><!--close readmore-->
-	  </div><!--close content_grey_container_box-->
-      <div class="content_grey_container_boxl">
-		<h4>Latest Projects</h4>
-	    <p> Phasellus laoreet feugiat risus. Ut tincidunt, ante vel fermentum iaculis.</p>
-	    <div class="readmore">
-		  <a href="#">Read more</a>
-		</div><!--close readmore-->	  
-	  </div><!--close content_grey_container_box1-->      
-	  <br style="clear:both"/>
-    </div><!--close content_grey-->   
- 
+
   </div><!--close main-->
-  
+  	<div id="content_grey">
+	<?php echo $hp->southbar_get(); ?>
+    </div><!--close content_grey--> 
   <div id="footer">
-	  <a href="http://validator.w3.org/check?uri=referer">Valid XHTML</a> | <a href="http://fotogrph.com/">Images</a> | website template by <a href="http://www.araynordesign.co.uk">ARaynorDesign</a> | <?php echo $hp->footer_get(); ?>
+	website template by <a href="http://www.araynordesign.co.uk">ARaynorDesign</a> | <?php echo $hp->footer_get(); ?>
+	Copyright 2014 <a href="http://www.gnp-tec.net/">GNP-Tec.net</a>
   </div><!--close footer-->  
   
 </body>

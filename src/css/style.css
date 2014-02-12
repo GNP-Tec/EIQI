@@ -238,7 +238,7 @@ ul#menu li:hover a
   
 #content_grey
  { width: 920px;
-  height: 160px;
+  min-height: 160px;
   text-align: center; 
   background: #1D1D1D;
   background: -moz-linear-gradient(#535353, #1d1d1d);
