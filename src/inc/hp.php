@@ -3,7 +3,7 @@ require_once("inc/hs_core.php"); //Include Core-File for basic user-IO
 class hp {
 	var $pages=array("home", "user_set", "vm_ov", "user_create");
 	var $titles=array("Home", "Account settings", "VM Overview", "Create new users");
-	var $links=array("Home", "Account", "VM Overview");
+	var $links=array("Home", "Account", "VM Overview", "New User");
 	var $curr=0;
 	var $hs;
 
@@ -100,11 +100,19 @@ class hp {
 					break;
 				case 1: $ret.="<h1>User-Settings</h1>";
 					$ret.="<form action=\"index.php\" method=\"post\">";
-					$ret.="Username: ".$this->hs->get_user()."<br>";
-					$ret.="Email: <input type=\"text\" name=\"se_email\">";
-		
-					$ret.="<input type=\"submit\" value=\"Update\">";
-					$ret.="</form>";
+					$ret.="<table border=0>";
+					$ret.="<tr><td align=\"right\">Username: </td><td>".$this->hs->get_user()."</td></tr>";
+					$ret.="<tr><td align=\"right\">Email: </td><td><input type=\"text\" name=\"se_email\" value=\"".$this->hs->get_email()."\"></td></tr>";
+					$ret.="<tr><td align=\"right\">Title: </td><td><input type=\"text\" name=\"se_title\" value=\"".$this->hs->get_title()."\"></td></tr>";
+					$ret.="<tr><td align=\"right\">First Name: </td><td><input type=\"text\" name=\"se_first_name\" value=\"".$this->hs->get_first_name()."\"></td></tr>";
+					$ret.="<tr><td align=\"right\">Last Name: </td><td><input type=\"text\" name=\"se_last_name\" value=\"".$this->hs->get_last_name()."\"></td></tr>";
+					$ret.="<tr><td align=\"right\">Address: </td><td><input type=\"text\" name=\"se_address\" value=\"".$this->hs->get_address()."\"></td></tr>";
+					$ret.="<tr><td align=\"right\">Postcode </td><td><input type=\"text\" name=\"se_postcode\" value=\"".$this->hs->get_postcode()."\"></td></tr>";
+					$ret.="<tr><td align=\"right\">City: </td><td><input type=\"text\" name=\"se_city\" value=\"".$this->hs->get_city()."\"></td></tr>";
+					$ret.="<tr><td align=\"right\">Country: </td><td><input type=\"text\" name=\"se_country\" value=\"".$this->hs->get_country()."\"></td></tr>";
+					$ret.="<tr><td align=\"right\">Language: </td><td><input type=\"text\" name=\"se_language\" value=\"".$this->hs->get_language()."\"></td></tr>";
+					$ret.="<tr><td align=\"right\"><input type=\"submit\" value=\"Update\"></td></tr>";
+					$ret.="</table></form>";
 					break;
 			}
 		} else {
